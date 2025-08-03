@@ -1,0 +1,10 @@
+{
+    "login-welcome": "Welcome back!",
+    "login-email": "Email address",
+    "login-password": "Password",
+    "login-remember-me": "Remember me",
+    "login-forgot-password": "Forgot password?",
+    "login-sign-up": "Sign up",
+    "login-sign-in": "Sign in",
+    "login-no-account": "Don't have an account?"
+}
