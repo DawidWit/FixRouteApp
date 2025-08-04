@@ -2,6 +2,8 @@ import React from 'react';
 import './Login.modules.css';
 import Logo from '../components/icons/logo.png';
 import { useTranslation } from 'react-i18next';
+import { loginUser } from '../services/authService';
+import { showSuccess } from '../utils/toast';
 
 const Login: React.FC = () => {
     const { t } = useTranslation();
@@ -17,13 +19,23 @@ const Login: React.FC = () => {
                 <div className="login-header">
                     <h1>{t('login-welcome')}</h1>
                 </div>
-                <form onSubmit={(e) => e.preventDefault()}>
-                    <input type="email" placeholder={t('login-email')} required />
-                    <input type="password" placeholder={t('login-password')} required />
+                <form noValidate onSubmit={async (e) => {e.preventDefault();
+                showSuccess('SUCCess');
+                    /* const form = e.target as HTMLFormElement;
+                    const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+                    const password = (form.elements.namedItem('password') as HTMLInputElement).value;
+                    const rememberMe = (form.elements.namedItem('remember') as HTMLInputElement).checked;
+                    await loginUser({ email, password, rememberMe });*/
+                }}>
+                    <input type="email" placeholder={t('login-email')} name="email" required />
+                    <input type="password" placeholder={t('login-password')} name="password" required />
 
                     <div className="options">
                         <label>
-                            <input type="checkbox" /> {t('login-remember-me')}
+                           <div className="checkbox-wrapper">
+  <input type="checkbox" id="remember" name="remember" />
+  <label htmlFor="remember">{t('login-remember-me')}</label>
+</div>
                         </label>
                         <a href="#">{t('login-forgot-password')}</a>
                     </div>

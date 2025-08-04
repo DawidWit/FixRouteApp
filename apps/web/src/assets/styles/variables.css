@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Gabarito:wght@400..900&display=swap');
+
 :root{
     --primary-color: #488286;
     --primary-color-hover: #3a6b6c;
     --secondary-color: #305252;
     --background-color: #B7D5D4;
     --text-color: #373E40;
+    --font-default: 'Arimo', sans-serif;
+  --font-heading: 'Gabarito', sans-serif;
+    
 }

@@ -1,10 +1,11 @@
 .login-container {
+    min-height: 100dvh; 
+    background-color: var(--background-color);
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
-    background-color: #f1f5f9;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    align-items: center;
+    padding: 2rem; 
+    box-sizing: border-box;
 }
 
 .logo-row {
@@ -21,11 +22,57 @@
     width: auto;
 }
 
+@media screen and (max-height: 520px) {
+    .logo-row {
+        display: none;
+    }
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    user-select: none;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    background-color: #fff;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.checkbox-wrapper input[type="checkbox"]::after {
+    content: '';
+    position: absolute;
+    display: none;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked::after {
+    display: block;
+    left: 4px;
+    top: 0px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
 .logo-text {
     font-size: 2.2rem;
     font-weight: 600;
     color: var(--primary-color);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .login-box {
@@ -87,7 +134,7 @@ form input[type="password"]:focus {
     color: white;
     border: none;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     cursor: pointer;
     margin-bottom: 1rem;
     transition: background-color 0.3s ease;
