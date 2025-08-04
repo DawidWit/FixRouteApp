@@ -4,6 +4,7 @@
   border: 2px solid var(--primary-color);
   font-family: var(--font-default);
   color: var(--text-color);
+  
 }
 
 .custom-toast-body {
@@ -11,5 +12,5 @@
 }
 
 .custom-toast-progress {
-  background: #ffc107; /* custom progress bar color */
+  background: #ffc107; 
 }
