@@ -9,7 +9,7 @@ export const showSuccess = (msg: string) =>
     closeOnClick: true,
     draggable: false,
     className: 'custom-toast-success',
-    icon: <img src="/icons/success.svg" alt="success" style={{ width: '18px', height: '18px' }} />
+    icon: false 
   });
 
 export const showError = (msg: string) =>
@@ -18,7 +18,9 @@ export const showError = (msg: string) =>
     autoClose: 1500,
 hideProgressBar: true,
 closeOnClick: true,
-draggable: false
+draggable: false,
+icon: false,
+className: 'custom-toast-failure',
   });
 
 export const showInfo = (msg: string) =>

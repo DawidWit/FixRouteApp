@@ -6,6 +6,10 @@
     --secondary-color: #305252;
     --background-color: #B7D5D4;
     --text-color: #373E40;
+    --success-color: #5C9B8E;
+    --success-bg: #D0E5E0;
+    --error-color: #9B5C5C;
+    --error-bg: #EAD1D1;
     --font-default: 'Arimo', sans-serif;
   --font-heading: 'Gabarito', sans-serif;
     

@@ -1,5 +1,3 @@
-import { showError, showSuccess } from '../utils/toast';
-
 export interface LoginCredentials {
   email: string;
   password: string;
@@ -11,6 +9,9 @@ export const loginUser = async ({
   password,
   rememberMe,
 }: LoginCredentials): Promise<void> => {
+  
+
+
   try {
     const response = await fetch('https://your-api.com/auth/login', {
       method: 'POST',
@@ -25,10 +26,7 @@ export const loginUser = async ({
 
     const data = await response.json();
     localStorage.setItem('token', data.token);
-
-    showSuccess('Login successful');
   } catch (error: any) {
-    showError(error.message || 'Login failed');
     throw error; 
   }
 };

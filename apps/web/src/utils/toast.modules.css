@@ -1,7 +1,16 @@
 .custom-toast-success {
-  background-color: white;
+   background-color: var(--success-bg);
   border-radius: 8px;
-  border: 2px solid var(--primary-color);
+  border: 3px solid var(--success-color);
+  font-family: var(--font-default);
+  color: var(--text-color);
+  
+}
+
+.custom-toast-failure {
+  background-color: var(--error-bg);
+  border-radius: 8px;
+  border: 3px solid var(--error-color);
   font-family: var(--font-default);
   color: var(--text-color);
   
