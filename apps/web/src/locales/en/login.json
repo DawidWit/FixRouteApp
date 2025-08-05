@@ -6,5 +6,7 @@
     "login-forgot-password": "Forgot password?",
     "login-sign-up": "Sign up",
     "login-sign-in": "Sign in",
-    "login-no-account": "Don't have an account?"
+    "login-no-account": "Don't have an account?",
+    "login-enter-email": "Please enter your email address",
+    "login-enter-password": "Please enter your password"
 }

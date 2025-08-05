@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Gabarito:wght@400..900&display=swap');
 
 :root{
-    --primary-color: #488286;
-    --primary-color-hover: #3a6b6c;
+    --primary-color: #FEE32B;
+    --button-color: #FEE32B;
+    --button-color-hover: #e6cb21;
     --secondary-color: #305252;
-    --background-color: #B7D5D4;
-    --text-color: #373E40;
+    --background-color: #FBEF9C;
+    --text-color: #201D18;
     --success-color: #5C9B8E;
     --success-bg: #D0E5E0;
     --error-color: #9B5C5C;

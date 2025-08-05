@@ -1,11 +1,13 @@
 .login-container {
-    min-height: 100dvh; 
-    background-color: var(--background-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem; 
-    box-sizing: border-box;
+  height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-color: var(--background-color);
 }
 
 .logo-row {
@@ -39,7 +41,7 @@
     appearance: none;
     width: 18px;
     height: 18px;
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--text-color);
     border-radius: 4px;
     position: relative;
     cursor: pointer;
@@ -48,8 +50,8 @@
 }
 
 .checkbox-wrapper input[type="checkbox"]:checked {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+    background-color: var(--text-color);
+    border-color: var(--text-color);
 }
 
 .checkbox-wrapper input[type="checkbox"]::after {
@@ -72,16 +74,19 @@
 .logo-text {
     font-size: 2.2rem;
     font-weight: 600;
-    color: var(--primary-color);
+    color: var(--text-color);
 }
 
 .login-box {
-    background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  max-height: 100%;
+  overflow: auto;
+  background:#FDFDF9  ;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  color: var(--text-color);
 }
 
 .login-header h2 {
@@ -89,16 +94,18 @@
     font-weight: 300;
     color: #6b7280;
     margin: 0;
+    margin-bottom: 1.5rem;
 }
 
 .login-header h1 {
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
 }
 
 form input[type="email"],
+form input[type="text"],
 form input[type="password"] {
     width: 100%;
     padding: 0.75rem;
@@ -109,6 +116,7 @@ form input[type="password"] {
 }
 
 form input[type="email"]:focus,
+form input[type="text"]:focus,
 form input[type="password"]:focus {
     border: 1px solid var(--secondary-color);
     outline: none;
@@ -123,15 +131,15 @@ form input[type="password"]:focus {
 }
 
 .options a {
-    color: var(--primary-color);
+    color: #4285F4;
     text-decoration: none;
 }
 
 .primary-btn {
     width: 100%;
     padding: 0.75rem;
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--button-color);
+    color: #201D18;
     border: none;
     border-radius: 8px;
     font-size: 1.1rem;
@@ -141,7 +149,7 @@ form input[type="password"]:focus {
 }
 
 .primary-btn:hover {
-    background-color: var(--primary-color-hover);
+    background-color: var(--button-color-hover);
 }
 
 .footer {
@@ -151,6 +159,6 @@ form input[type="password"]:focus {
 }
 
 .footer a {
-    color: var(--primary-color);
+    color: #4285F4;
     text-decoration: none;
 }

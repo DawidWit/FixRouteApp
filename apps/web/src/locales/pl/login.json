@@ -6,5 +6,7 @@
     "login-forgot-password": "Zapomniałeś hasła?",
     "login-sign-up": "Zarejestruj się",
     "login-sign-in": "Zaloguj się",
-    "login-no-account": "Nie masz konta?"
+    "login-no-account": "Nie masz konta?",
+    "login-enter-email": "Proszę wprowadź adres e-mail",
+    "login-enter-password": "Proszę wprowadź hasło"
 }

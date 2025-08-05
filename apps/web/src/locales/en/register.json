@@ -1,0 +1,14 @@
+{
+    "register-welcome": "Welcome to FixRoute!",
+    "register-fullName": "Full Name",
+    "register-email": "Email",
+    "register-password": "Password",
+    "register-confirm-password": "Confirm Password",
+    "register-have-account": "Already have an account?",
+    "register-login": "Sign in",
+    "register-sign-up": "Sign up",
+    "register-join-today": "Join today to start your journey!",
+    "register-enter-valid-email": "Please enter a valid email address",
+    "register-enter-password": "Please enter your password",
+    "register-password-mismatch": "Passwords do not match"
+}

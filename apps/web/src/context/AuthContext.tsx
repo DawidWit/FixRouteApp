@@ -1,30 +1,45 @@
-import { createContext, useState} from "react";
-import type { ReactNode } from "react";
-
-interface AuthContextType {
-  token: string | null;
-  isAuthenticated: boolean;
-  login: (token: string) => void;
-  logout: () => void;
-}
+import {
+  createContext,
+  useState,
+  useEffect,
+  type ReactNode,
+} from 'react';
+import { loginUser } from '../services/auth.service';
+import { showError, showSuccess } from '../utils/toast';
+import type { LoginCredentials, AuthContextType, RegisterCredentials } from '../types/auth.types';
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [token, setToken] = useState<string | null>(() => localStorage.getItem("token"));
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = (newToken: string) => {
-    localStorage.setItem("token", newToken);
-    setToken(newToken);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsAuthenticated(!!token);
+  }, []);
+
+  const login = async (credentials: LoginCredentials) => {
+    try {
+      await loginUser(credentials);
+      setIsAuthenticated(true);
+    } catch (error: any) {
+      showError(error.message || 'Login failed');
+      throw error;
+    }
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+    showSuccess('Logged out successfully');
+  };
+
+  const register = async (credentials: RegisterCredentials) => {
+    
   };
 
   return (
-    <AuthContext.Provider value={{ token, isAuthenticated: !!token, login, logout }}>
+    <AuthContext.Provider value={{ login, logout, register, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
