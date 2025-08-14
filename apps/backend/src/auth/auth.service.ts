@@ -1,31 +1,128 @@
-import { Injectable, ForbiddenException } from '@nestjs/common';
+import { Injectable, ForbiddenException, InternalServerErrorException, ConflictException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { AuthDto } from './dto/auth.dto';
+import { AuthDto, AuthResponse, VALIDATION_RULES } from '@shared_types/auth.types';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private prisma: PrismaService, private jwt: JwtService) {}
+  constructor(private prisma: PrismaService, private jwt: JwtService) { }
 
-  async register(dto: AuthDto) {
-    const hashed = await bcrypt.hash(dto.password, 10);
+ async register(dto: AuthDto): Promise<AuthResponse> {
+  // Input sanitization with proper typing
+  const email: string = dto.email?.toLowerCase().trim() ?? '';
+  const fullName: string = dto.fullName?.trim() ?? '';
+  const password: string = dto.password ?? '';
 
-    try {
-      const user = await this.prisma.user.create({
-        data: {
-          email: dto.email,
-          password: hashed,
-        },
-      });
-
-      return this.signToken(user.id, user.email);
-    } catch (err) {
-      throw new ForbiddenException('Email already in use');
-    }
+  // Check for required fields
+  if (!email || !fullName || !password) {
+    throw new BadRequestException('register-all-fields-required');
   }
 
-  async login(dto: AuthDto) {
+  // Email format validation using shared constants
+  if (!VALIDATION_RULES.EMAIL.REGEX.test(email)) {
+    throw new BadRequestException('register-invalid-email-format');
+  }
+
+  // Email length validation
+  if (email.length > VALIDATION_RULES.EMAIL.MAX_LENGTH) {
+    throw new BadRequestException('register-email-too-long');
+  }
+
+  // Full name validation using shared constants
+  if (fullName.length < VALIDATION_RULES.FULL_NAME.MIN_LENGTH || 
+      fullName.length > VALIDATION_RULES.FULL_NAME.MAX_LENGTH) {
+    throw new BadRequestException('register-fullname-length');
+  }
+
+  // Check for potentially malicious characters in full name
+  if (!VALIDATION_RULES.FULL_NAME.REGEX.test(fullName)) {
+    throw new BadRequestException('register-invalid-fullname');
+  }
+
+  // Password strength validation using shared constants
+  if (password.length < VALIDATION_RULES.PASSWORD.MIN_LENGTH) {
+    throw new BadRequestException('register-password-too-short');
+  }
+
+  if (password.length > VALIDATION_RULES.PASSWORD.MAX_LENGTH) {
+    throw new BadRequestException('register-password-too-long');
+  }
+
+  if (!VALIDATION_RULES.PASSWORD.REGEX.test(password)) {
+    throw new BadRequestException('register-password-strength');
+  }
+
+  try {
+    // Check for existing user with proper typing
+    const existingUser: { id: number } | null = await this.prisma.user.findUnique({
+      where: { email },
+      select: { id: true }, // Only select what we need
+    });
+
+    if (existingUser) {
+      throw new ConflictException('register-email-in-use');
+    }
+
+    // Hash password with proper typing
+    const saltRounds: number = 12;
+    const hashedPassword: string = await bcrypt.hash(password, saltRounds);
+
+    // Create user with proper typing for the select
+    const user: {
+      id: number;
+      email: string;
+      fullName: string;
+      createdAt: Date;
+    } = await this.prisma.user.create({
+      data: {
+        email,
+        fullName,
+        password: hashedPassword,
+      },
+      select: {
+        id: true,
+        email: true,
+        fullName: true,
+        createdAt: true,
+      },
+    });
+
+    // Return properly typed token response
+    const authResponse: AuthResponse = await this.signToken(user.id, user.email, dto.rememberMe);
+    
+    // Optionally include user data in response
+    return {
+      ...authResponse,
+      user: {
+        id: user.id,
+        email: user.email,
+        fullName: user.fullName,
+        createdAt: user.createdAt,
+      },
+    };
+
+  } catch (error: any) {
+    // Handle specific Prisma errors with proper typing
+    if (error?.code === 'P2002') {
+      throw new ConflictException('register-email-in-use');
+    }
+
+    // Re-throw known exceptions
+    if (error instanceof BadRequestException ||
+        error instanceof ConflictException) {
+      throw error;
+    }
+
+    // Log unexpected errors for debugging
+    console.error('Registration error:', error);
+
+    // Generic error for unexpected issues
+    throw new InternalServerErrorException('register-unexpected-error');
+  }
+}
+
+  /*async login(dto: AuthDto) {
     const user = await this.prisma.user.findUnique({
       where: { email: dto.email },
     });
@@ -35,14 +132,14 @@ export class AuthService {
     }
 
     return this.signToken(user.id, user.email);
-  }
+  }*/
 
-  async signToken(userId: number, email: string): Promise<{ access_token: string }> {
+  async signToken(userId: number, email: string, rememberMe: boolean): Promise<AuthResponse> {
     const payload = { sub: userId, email };
     const token = await this.jwt.signAsync(payload, {
       secret: process.env.JWT_SECRET,
-      expiresIn: '1h',
+      expiresIn: rememberMe ? "720h" : '1h',
     });
-    return { access_token: token };
+    return { accessToken: token };
   }
 }

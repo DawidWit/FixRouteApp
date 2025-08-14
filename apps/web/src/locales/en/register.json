@@ -10,5 +10,16 @@
     "register-join-today": "Join today to start your journey!",
     "register-enter-valid-email": "Please enter a valid email address",
     "register-enter-password": "Please enter your password",
-    "register-password-mismatch": "Passwords do not match"
+    "register-password-mismatch": "Passwords do not match",
+    "register-enter-fullName": "Please enter your full name",
+    "register-password-length": "Password must be between 8 and 128 characters",
+    "register-password-strength": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+    "register-email-in-use": "Email is already in use",
+    "register-unexpected-error": "An unexpected error occurred. Please try again later.",
+    "register-invalid-fullname": "Full name can only contain letters, spaces, and hyphens",
+    "register-invalid-email-format": "Invalid email format",
+    "register-fullname-length": "Full name must be between 2 and 50 characters",
+    "register-all-fields-required": "All fields are required",
+    "register-success": "Account created successfully! Please log in to continue.",
+    "register-no-token-error": "Registration completed, but authentication failed. Please try logging in."
 }

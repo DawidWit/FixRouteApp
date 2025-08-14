@@ -6,26 +6,23 @@ import Loader from '../components/ui/Loader';
 import { useAuth } from '../hooks/useAuth';
 import { showError } from '../utils/toast';
 import { Navigate } from 'react-router-dom';
+import type { LoginCredentials } from '../../../shared_types/auth.types';
 
 const Login: React.FC = () => {
-   const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
   if (isAuthenticated) return <Navigate to="/dashboard" replace />;
   const [isLoading, setIsLoading] = useState(false);
+  const [loginData, setLoginData] = useState<LoginCredentials>({ email: '', password: '', rememberMe: false });
   const { t } = useTranslation();
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-
-    const form = e.currentTarget;
-    const email = (form.elements.namedItem('email') as HTMLInputElement).value;
-    const password = (form.elements.namedItem('password') as HTMLInputElement).value;
-    const rememberMe = (form.elements.namedItem('remember') as HTMLInputElement).checked;
-
+    const { email, password} = loginData;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
-      
+
       showError(t('login-enter-email'));
       setIsLoading(false);
       return;
@@ -38,9 +35,9 @@ const Login: React.FC = () => {
     }
 
     try {
-      await login({ email, password, rememberMe });
+      await login(loginData);
     } catch (err) {
-  
+
     } finally {
       setIsLoading(false);
     }
@@ -59,17 +56,21 @@ const Login: React.FC = () => {
             <h2></h2>
           </div>
           <form noValidate onSubmit={handleSubmit}>
-            <input type="email" placeholder={t('login-email')} name="email" required />
-            <input type="password" placeholder={t('login-password')} name="password" required />
-
+            <input
+              type="email"
+              onChange={e => setLoginData(prev => ({ ...prev, email: e.target.value }))}
+              placeholder={t('login-email')}
+              name="email"
+              required
+            />
+            <input type="password" onChange={p => setLoginData(prev => ({ ...prev, password: p.target.value }))} placeholder={t('login-password')} name="password" required />
             <div className="options">
               <div className="checkbox-wrapper">
-                <input type="checkbox" id="remember" name="remember" />
+                <input type="checkbox" id="remember" name="remember" onChange={r => setLoginData(prev => ({ ...prev, rememberMe: r.target.checked }))} />
                 <label htmlFor="remember">{t('login-remember-me')}</label>
               </div>
               <a href="/forgot-password">{t('login-forgot-password')}</a>
             </div>
-
             <button type="submit" className="primary-btn" disabled={isLoading}>
               {isLoading ? (
                 <div className="loader-button-wrapper">
@@ -80,10 +81,9 @@ const Login: React.FC = () => {
               )}
             </button>
           </form>
-         <div className="footer">
-  {t('login-no-account')} <a href="/register">{t('login-sign-up')}</a>
-</div>
-
+          <div className="footer">
+            {t('login-no-account')} <a href="/register">{t('login-sign-up')}</a>
+          </div>
         </div>
       </div>
     </div>

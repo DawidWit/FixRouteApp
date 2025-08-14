@@ -5,26 +5,24 @@ import { useTranslation } from 'react-i18next';
 import Loader from '../components/ui/Loader';
 import { showError } from '../utils/toast';
 import { useAuth } from '../hooks/useAuth';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
+import type { RegisterCredentials } from '../../../shared_types/auth.types'
+import type { RegisterResult } from '../../../shared_types/auth.types';
 
 const Register: React.FC = () => {
   const { isAuthenticated } = useAuth();
   if (isAuthenticated) return <Navigate to="/dashboard" replace />;
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [registerData, setRegisterData] = useState<RegisterCredentials>({ email: '', password: '', fullName: '', confirmPassword: '' });
   const { t } = useTranslation();
-  const { register } = useAuth(); // Assumes `register` exists in your hook
+  const { register } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-
-    const form = e.currentTarget;
-    const fullName = (form.elements.namedItem('fullName') as HTMLInputElement).value;
-    const email = (form.elements.namedItem('email') as HTMLInputElement).value;
-    const password = (form.elements.namedItem('password') as HTMLInputElement).value;
-    const confirmPassword = (form.elements.namedItem('confirmPassword') as HTMLInputElement).value;
-
+    const { email, password, fullName, confirmPassword } = registerData;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!email || !emailRegex.test(email)) {
@@ -33,7 +31,13 @@ const Register: React.FC = () => {
       return;
     }
 
-    if (!password || password.length < 6) {
+    if (!fullName) {
+      showError(t('register-enter-fullName'));
+      setIsLoading(false);
+      return;
+    }
+
+    if (!password || password.length < 12) {
       showError(t('register-password-length'));
       setIsLoading(false);
       return;
@@ -46,7 +50,10 @@ const Register: React.FC = () => {
     }
 
     try {
-      await register({ email, password, fullName}); 
+      const data: RegisterResult = await register(registerData);
+      if (data.success) {
+        navigate("/login");
+      }
     } catch (err) {
     } finally {
       setIsLoading(false);
@@ -65,10 +72,10 @@ const Register: React.FC = () => {
             <h1>{t('register-welcome')}</h1>
           </div>
           <form noValidate onSubmit={handleSubmit}>
-            <input type="email" placeholder={t('register-email')} name="email" required />
-            <input type="text" placeholder={t('register-fullName')} name="fullName" required />
-            <input type="password" placeholder={t('register-password')} name="password" required />
-            <input type="password" placeholder={t('register-confirm-password')} name="confirmPassword" required />
+            <input type="email" onChange={e => setRegisterData(prev => ({ ...prev, email: e.target.value }))} placeholder={t('register-email')} name="email" required />
+            <input type="text" onChange={n => setRegisterData(prev => ({ ...prev, fullName: n.target.value }))} placeholder={t('register-fullName')} name="fullName" required />
+            <input type="password" onChange={p => setRegisterData(prev => ({ ...prev, password: p.target.value }))} placeholder={t('register-password')} name="password" required />
+            <input type="password" onChange={cp => setRegisterData(prev => ({ ...prev, confirmPassword: cp.target.value }))} placeholder={t('register-confirm-password')} name="confirmPassword" required />
 
             <button type="submit" className="primary-btn" disabled={isLoading}>
               {isLoading ? (

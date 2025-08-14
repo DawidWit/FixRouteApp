@@ -10,5 +10,16 @@
     "register-sign-up": "Zarejestruj się",
     "register-enter-valid-email": "Wprowadź poprawny adres e-mail",
     "register-enter-password": "Wprowadź hasło",
-    "register-password-mismatch": "Hasła nie pasują do siebie"
+    "register-password-mismatch": "Hasła nie pasują do siebie",
+    "register-enter-fullName": "Wprowadź swoje imię i nazwisko",
+    "register-password-length": "Hasło musi mieć od 8 do 128 znaków",
+    "register-password-strength": "Hasło musi zawierać co najmniej jedną wielką literę, jedną małą literę, jedną cyfrę i jeden znak specjalny",
+    "register-email-in-use": "Adres e-mail jest już zajęty",
+    "register-unexpected-error": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie później.",
+    "register-invalid-fullname": "Imię i nazwisko może zawierać tylko litery, spacje i myślniki",
+    "register-invalid-email-format": "Niepoprawny format adresu e-mail",
+    "register-fullname-length": "Imię i nazwisko musi mieć od 2 do 50 znaków",
+    "register-all-fields-required": "Wszystkie pola są wymagane",
+    "register-success": "Konto zostało utworzone pomyślnie! Zaloguj się, aby kontynuować.",
+    "register-no-token-error": "Rejestracja zakończona, ale uwierzytelnienie nie powiodło się. Spróbuj się zalogować."
 }
