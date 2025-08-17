@@ -6,8 +6,8 @@ import Loader from '../components/ui/Loader';
 import { showError } from '../utils/toast';
 import { useAuth } from '../hooks/useAuth';
 import { Navigate, useNavigate } from 'react-router-dom';
-import type { RegisterCredentials } from '../../../shared_types/auth.types'
-import type { RegisterResult } from '../../../shared_types/auth.types';
+import type { RegisterCredentials } from '../types/auth.types';
+import type { RegisterResult } from '../types/auth.types';
 
 const Register: React.FC = () => {
   const { isAuthenticated } = useAuth();

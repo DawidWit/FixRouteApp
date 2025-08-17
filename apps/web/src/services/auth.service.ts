@@ -1,8 +1,8 @@
-import type { LoginCredentials, RegisterCredentials, RegisterResponse } from "../../../shared_types/auth.types";
+import type { LoginCredentials, RegisterCredentials, RegisterResponse } from '../types/auth.types';
 
 // Base URL depending on environment
 const API_URL =
-  process.env.NODE_ENV === "production"
+  import.meta.env.MODE === "production"
     ? "https://my-production-api.com" // replace with your production API
     : "http://localhost:3000";
 

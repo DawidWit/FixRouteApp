@@ -1,9 +1,12 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "@web/*": ["apps/web/src/*"],
-            "@backend/*": ["apps/backend/src/*"],
-        },
-    }
+  "compilerOptions": {
+    "target": "ES2021",
+    "lib": ["ES2021"],
+    "moduleResolution": "Node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "sourceMap": true
+  }
 }

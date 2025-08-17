@@ -6,7 +6,7 @@ import {
 } from 'react';
 import { loginUser, registerUser } from '../services/auth.service';
 import { showError, showSuccess } from '../utils/toast';
-import type { LoginCredentials, AuthContextType, RegisterCredentials, RegisterResponse, RegisterResult } from '../../../shared_types/auth.types';
+import type { LoginCredentials, AuthContextType, RegisterCredentials, RegisterResponse, RegisterResult } from '../types/auth.types';
 import { useTranslation } from 'react-i18next';
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);

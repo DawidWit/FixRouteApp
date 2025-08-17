@@ -6,7 +6,7 @@ import Loader from '../components/ui/Loader';
 import { useAuth } from '../hooks/useAuth';
 import { showError } from '../utils/toast';
 import { Navigate } from 'react-router-dom';
-import type { LoginCredentials } from '../../../shared_types/auth.types';
+import type { LoginCredentials } from '../types/auth.types';
 
 const Login: React.FC = () => {
   const { isAuthenticated } = useAuth();

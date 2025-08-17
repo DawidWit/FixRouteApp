@@ -1,6 +1,6 @@
 import { Injectable, ForbiddenException, InternalServerErrorException, ConflictException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { AuthDto, AuthResponse, VALIDATION_RULES } from '@shared_types/auth.types';
+import { AuthDto, AuthResponse, VALIDATION_RULES } from '../types/auth';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
