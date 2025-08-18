@@ -1,5 +1,6 @@
 {
     "register-welcome": "Welcome to FixRoute!",
+    "register-subtitle": "Register now to gain access to your clients' projects",
     "register-fullName": "Full Name",
     "register-email": "Email",
     "register-password": "Password",

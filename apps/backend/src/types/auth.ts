@@ -29,6 +29,6 @@ export const VALIDATION_RULES = {
   PASSWORD: {
     MIN_LENGTH: 8,
     MAX_LENGTH: 128,
-    REGEX: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
+    REGEX: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
   },
 } as const;

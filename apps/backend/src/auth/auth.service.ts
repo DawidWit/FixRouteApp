@@ -54,11 +54,11 @@ export class AuthService {
     }
 
     // Password strength validation using shared constants
-    if (password.length < VALIDATION_RULES.PASSWORD.MIN_LENGTH) {
+    if (password.length <= VALIDATION_RULES.PASSWORD.MIN_LENGTH) {
       throw new BadRequestException('register-password-too-short');
     }
 
-    if (password.length > VALIDATION_RULES.PASSWORD.MAX_LENGTH) {
+    if (password.length >= VALIDATION_RULES.PASSWORD.MAX_LENGTH) {
       throw new BadRequestException('register-password-too-long');
     }
 
