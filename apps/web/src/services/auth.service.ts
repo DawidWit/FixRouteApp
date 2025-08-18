@@ -1,4 +1,8 @@
-import type { LoginCredentials, RegisterCredentials, RegisterResponse } from '../types/auth.types';
+import type {
+  LoginCredentials,
+  RegisterCredentials,
+  RegisterResponse,
+} from "../types/auth.types";
 
 // Base URL depending on environment
 const API_URL =
@@ -19,7 +23,9 @@ const handleRequest = async (url: string, options: RequestInit) => {
   }
 
   if (!response.ok) {
-    throw new Error(data?.message || `Request failed with status ${response.status}`);
+    throw new Error(
+      data?.message || `Request failed with status ${response.status}`
+    );
   }
 
   return data;
@@ -39,6 +45,14 @@ export const loginUser = async ({
 
   // Store JWT token
   localStorage.setItem("token", data.token);
+};
+
+export const checkTokenValidity = async (token: String) => {
+  const data = await handleRequest(`${API_URL}/auth/checkToken`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token }),
+  });
 };
 
 // Register user

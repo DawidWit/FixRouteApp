@@ -40,7 +40,6 @@ const ForgotPassword: React.FC = () => {
     <div>
       <div className="logo-row">
         <img src={Logo} alt="Logo" draggable={false} />
-        <span className="logo-text">FixRoute</span>
       </div>
       <div className="login-container">
         <div className="login-box">

@@ -37,7 +37,7 @@ const Register: React.FC = () => {
       return;
     }
 
-    if (!password || password.length < 12) {
+    if (!password || password.length < 7) {
       showError(t('register-password-length'));
       setIsLoading(false);
       return;
@@ -64,7 +64,6 @@ const Register: React.FC = () => {
     <div>
       <div className="logo-row">
         <img src={Logo} alt="Logo" draggable={false} />
-        <span className="logo-text">FixRoute</span>
       </div>
       <div className="login-container">
         <div className="login-box">

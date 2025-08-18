@@ -18,5 +18,15 @@ model User {
   email     String   @unique
   password  String
   fullName  String
+  isActive    Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EmailVefification {
+  id        Int      @id @default(autoincrement())
+  email    String
+  otpCode  String
+  expiresAt  DateTime
   createdAt DateTime @default(now())
 }

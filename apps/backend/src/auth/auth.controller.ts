@@ -16,4 +16,9 @@ export class AuthController {
     return true;
     //return this.authService.login(dto);
   }
+
+  @Post('checkToken')
+  checkToken(@Body() token: string) {
+    return this.authService.checkToken(token);
+  }
 }
