@@ -22,5 +22,10 @@
     "register-fullname-length": "Imię i nazwisko musi mieć od 2 do 50 znaków",
     "register-all-fields-required": "Wszystkie pola są wymagane",
     "register-success": "Konto zostało utworzone pomyślnie! Zaloguj się, aby kontynuować.",
-    "register-no-token-error": "Rejestracja zakończona, ale uwierzytelnienie nie powiodło się. Spróbuj się zalogować."
+    "register-no-token-error": "Rejestracja zakończona, ale uwierzytelnienie nie powiodło się. Spróbuj się zalogować.",
+
+    "register-form-help-8-characters": "Min. 8 znaków",
+    "register-form-help-lowercase-uppercase": "Duże i małe litery",
+    "register-form-help-number": "Numery",
+    "register-form-help-symbols": "Symbole (@$!%*?&)"
 }
