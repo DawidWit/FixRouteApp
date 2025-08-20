@@ -11,7 +11,6 @@
     "register-sign-up": "Zarejestruj się",
     "register-enter-valid-email": "Wprowadź poprawny adres e-mail",
     "register-enter-password": "Wprowadź hasło",
-    "register-password-mismatch": "Hasła nie pasują do siebie",
     "register-enter-fullName": "Wprowadź swoje imię i nazwisko",
     "register-password-length": "Hasło musi mieć od 8 do 128 znaków",
     "register-password-strength": "Hasło musi zawierać co najmniej jedną wielką literę, jedną małą literę, jedną cyfrę i jeden znak specjalny",
@@ -27,5 +26,9 @@
     "register-form-help-8-characters": "Min. 8 znaków",
     "register-form-help-lowercase-uppercase": "Duże i małe litery",
     "register-form-help-number": "Numery",
-    "register-form-help-symbols": "Symbole (@$!%*?&)"
+    "register-form-help-symbols": "Symbole (@$!%*?&)",
+    "register-form-help-password-rules": "Twoje hasło nie spełnia wymagań",
+    "register-form-terms-label": "<0>Akceptuję</0> <1>regulamin użytkowania serwisu</1>",
+    "register-form-accept-terms": "Musisz zaakceptować regulamin użytkowania serwisu",
+    "register-form-password-dont-match": "Wprowadzone hasła różnią się od siebie"
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/Login.css";
 import Logo from "../components/icons/logo.png";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import Loader from "../components/ui/Loader";
 import { showError, showSuccess } from "../utils/toast";
 import { useAuth } from "../hooks/useAuth";
@@ -70,16 +70,18 @@ const Register: React.FC = () => {
       /[@$!%*?&]/.test(password);
 
     if (!passOk) {
-      e.password = t("register-password-rules") || "register-password-rules";
+      e.password =
+        t("register-form-help-password-rules") ||
+        "register-form-help-password-rules";
     }
 
     if (password !== confirmPassword) {
       e.confirmPassword =
-        t("register-passwords-dont-match") || "register-passwords-dont-match";
+        t("register-form-password-dont-match") || "register-form-password-dont-match";
     }
 
     if (!acceptTerms) {
-      e.terms = t("register-accept-terms") || "register-accept-terms";
+      e.terms = t("register-form-accept-terms") || "register-form-accept-terms";
     }
 
     setErrors(e);
@@ -279,12 +281,21 @@ const Register: React.FC = () => {
                 aria-describedby={errors.terms ? "terms-error" : undefined}
               />
               <label htmlFor="terms">
-                {t("register-terms-label") || (
-                  <>
-                    Akceptuję <a href="/terms">Regulamin</a> i{" "}
-                    <a href="/privacy">Politykę prywatności</a>.
-                  </>
-                )}
+                <Trans
+                  i18nKey="register-form-terms-label"
+                  className="footer"
+                  components={[
+                    <span style={{ fontSize: "15px"}} />,
+                    <Link
+                      to="/terms"
+                      style={{
+                        color: "#4285f4",
+                        textDecoration: "none",
+                        fontSize: "15px",
+                      }}
+                    />,
+                  ]}
+                />
               </label>
             </div>
             {errors.terms && (

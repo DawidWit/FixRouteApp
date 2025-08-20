@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
-import '../styles/Login.css';
-import Logo from '../components/icons/logo.png';
-import { useTranslation } from 'react-i18next';
-import Loader from '../components/ui/Loader';
-import { useAuth } from '../hooks/useAuth';
-import { showError } from '../utils/toast';
-import { Navigate } from 'react-router-dom';
+import React, { useState } from "react";
+import "../styles/Login.css";
+import Logo from "../components/icons/logo.png";
+import { useTranslation } from "react-i18next";
+import Loader from "../components/ui/Loader";
+import { useAuth } from "../hooks/useAuth";
+import { showError } from "../utils/toast";
+import { Link, Navigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import type { LoginCredentials } from '../types/auth.types';
+import type { LoginCredentials } from "../types/auth.types";
 
 const Login: React.FC = () => {
   const { isAuthenticated } = useAuth();
   if (isAuthenticated) return <Navigate to="/dashboard" replace />;
   const [isLoading, setIsLoading] = useState(false);
-  const [loginData, setLoginData] = useState<LoginCredentials>({ email: '', password: '', rememberMe: false });
+  const [loginData, setLoginData] = useState<LoginCredentials>({
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
   const { login } = useAuth();
@@ -24,13 +28,13 @@ const Login: React.FC = () => {
     const { email, password } = loginData;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
-      showError(t('login-enter-email'));
+      showError(t("login-enter-email"));
       setIsLoading(false);
       return;
     }
 
     if (!password) {
-      showError(t('login-enter-password'));
+      showError(t("login-enter-password"));
       setIsLoading(false);
       return;
     }
@@ -51,30 +55,37 @@ const Login: React.FC = () => {
       <div className="login-container">
         <div className="login-box">
           <div className="login-header">
-            <h1>{t('login-welcome')}</h1>
+            <h1>{t("login-welcome")}</h1>
             <h2></h2>
           </div>
           <form noValidate onSubmit={handleSubmit}>
             <input
               type="email"
-              onChange={e => setLoginData(prev => ({ ...prev, email: e.target.value }))}
-              placeholder={t('login-email')}
+              onChange={(e) =>
+                setLoginData((prev) => ({ ...prev, email: e.target.value }))
+              }
+              placeholder={t("login-email")}
               name="email"
               required
             />
             <div className="password-wrapper">
               <input
                 type={showPassword ? "text" : "password"}
-                onChange={p => setLoginData(prev => ({ ...prev, password: p.target.value }))}
-                placeholder={t('login-password')}
+                onChange={(p) =>
+                  setLoginData((prev) => ({
+                    ...prev,
+                    password: p.target.value,
+                  }))
+                }
+                placeholder={t("login-password")}
                 name="password"
-                style={{ paddingRight: '3rem' }}
+                style={{ paddingRight: "3rem" }}
                 required
               />
               <button
                 type="button"
                 className="password-toggle"
-                onClick={() => setShowPassword(prev => !prev)}
+                onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
@@ -85,11 +96,16 @@ const Login: React.FC = () => {
                   type="checkbox"
                   id="remember"
                   name="remember"
-                  onChange={r => setLoginData(prev => ({ ...prev, rememberMe: r.target.checked }))}
+                  onChange={(r) =>
+                    setLoginData((prev) => ({
+                      ...prev,
+                      rememberMe: r.target.checked,
+                    }))
+                  }
                 />
-                <label htmlFor="remember">{t('login-remember-me')}</label>
+                <label htmlFor="remember">{t("login-remember-me")}</label>
               </div>
-              <a href="/forgot-password">{t('login-forgot-password')}</a>
+              <Link to="/forgot-password">{t("login-forgot-password")}</Link>
             </div>
             <button type="submit" className="primary-btn" disabled={isLoading}>
               {isLoading ? (
@@ -97,12 +113,13 @@ const Login: React.FC = () => {
                   <Loader size={20} color="#201D18" thickness={3} />
                 </div>
               ) : (
-                t('login-sign-in')
+                t("login-sign-in")
               )}
             </button>
           </form>
           <div className="footer">
-            {t('login-no-account')} <a href="/register">{t('login-sign-up')}</a>
+            {t("login-no-account")}{" "}
+            <Link to="/register">{t("login-sign-up")}</Link>
           </div>
         </div>
       </div>

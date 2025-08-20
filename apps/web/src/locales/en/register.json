@@ -11,7 +11,6 @@
     "register-join-today": "Join today to start your journey!",
     "register-enter-valid-email": "Please enter a valid email address",
     "register-enter-password": "Please enter your password",
-    "register-password-mismatch": "Passwords do not match",
     "register-enter-fullName": "Please enter your full name",
     "register-password-length": "Password must be between 8 and 128 characters",
     "register-password-strength": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
@@ -24,8 +23,12 @@
     "register-success": "Account created successfully! Please log in to continue.",
     "register-no-token-error": "Registration completed, but authentication failed. Please try logging in.",
 
-    "register-form-help-8-characters": "At least 8 characters",
-    "register-form-help-lowercase-uppercase": "Uppercase and lowercase letters",
-    "register-form-help-number": "Numbers",
-    "register-form-help-symbols": "Symbols (@$!%*?&)"
+      "register-form-help-8-characters": "Min. 8 characters",
+  "register-form-help-lowercase-uppercase": "Uppercase and lowercase letters",
+  "register-form-help-number": "Numbers",
+  "register-form-help-symbols": "Symbols (@$!%*?&)",
+  "register-form-help-password-rules": "Your password does not meet the requirements",
+  "register-form-terms-label": "<0>I accept</0> the <1>terms of service</1>",
+  "register-form-accept-terms": "You must accept the terms of service",
+  "register-form-password-dont-match": "The entered passwords do not match"
 }
